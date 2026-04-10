@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import { Menu, X, ArrowRight, ArrowDown, ExternalLink, Star, Plus, Minus } from 'lucide-react';
 
 const fadeInUp = {
@@ -22,6 +22,11 @@ export default function App() {
   const [openFaq, setOpenFaq] = useState(null);
 
   const toggleFaq = (index) => setOpenFaq(openFaq === index ? null : index);
+
+  const { scrollY } = useScroll();
+  const heroOpacity = useTransform(scrollY, [0, 500], [1, 0]);
+  const heroY = useTransform(scrollY, [0, 500], [0, 150]);
+  const bgOpacity = useTransform(scrollY, [0, 600], [0.8, 0]);
 
   return (
     <div className="min-h-screen bg-brand-dark text-brand-light font-sans selection:bg-brand-gray selection:text-brand-dark">
@@ -85,7 +90,7 @@ export default function App() {
         </div>
 
         {/* Shooting Stars Layer */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <motion.div className="absolute inset-0 pointer-events-none overflow-hidden" style={{ opacity: bgOpacity }}>
           <div className="absolute top-1/2 left-1/2 w-[200%] h-[200%]" style={{ transform: 'translate(-50%, -50%) rotate(155deg)' }}>
             {[...Array(20)].map((_, i) => (
               <div
@@ -100,11 +105,12 @@ export default function App() {
               />
             ))}
           </div>
-        </div>
+        </motion.div>
 
         <motion.div
           className="relative z-10 w-full max-w-[1400px] px-4 mx-auto text-center"
           initial="hidden" animate="visible" variants={staggerContainer}
+          style={{ opacity: heroOpacity, y: heroY }}
         >
           <motion.div variants={fadeInUp} className="inline-flex items-center space-x-2 border border-green-500/30 rounded-full px-4 py-2 mb-8 bg-green-500/10 backdrop-blur-sm">
             <span className="relative flex h-2 w-2">
@@ -165,7 +171,7 @@ export default function App() {
       {/* Projects Grid */}
       <section id="projects" className="py-24 px-6 md:px-12 max-w-7xl mx-auto">
         <motion.div
-          initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={staggerContainer}
+          initial="hidden" whileInView="visible" viewport={{ once: false, amount: 0.1 }} variants={staggerContainer}
           className="grid grid-cols-1 md:grid-cols-2 gap-8"
         >
           {[1, 2, 3, 4].map((i) => (
@@ -201,7 +207,7 @@ export default function App() {
       <section className="py-24 px-6 md:px-12 bg-[#020617]">
         <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-16 items-center">
           <motion.div
-            initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer}
+            initial="hidden" whileInView="visible" viewport={{ once: false, amount: 0.2 }} variants={staggerContainer}
             className="flex-1 space-y-8"
           >
             <motion.h2 variants={fadeInUp} className="text-4xl md:text-5xl font-semibold">Meet Meily</motion.h2>
@@ -233,7 +239,7 @@ export default function App() {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.8 }}
+            initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: false, amount: 0.2 }} transition={{ duration: 0.8 }}
             className="flex-1 relative"
           >
             <img src="/images/portrait.png" alt="Meily" className="w-full h-auto rounded-[40px] grayscale hover:grayscale-0 transition duration-500 object-cover aspect-[4/5]" />
@@ -243,7 +249,7 @@ export default function App() {
 
       {/* Services */}
       <section id="services" className="py-24 px-6 md:px-12 max-w-7xl mx-auto text-center">
-        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer} className="max-w-3xl mx-auto space-y-8">
+        <motion.div initial="hidden" whileInView="visible" viewport={{ once: false, amount: 0.2 }} variants={staggerContainer} className="max-w-3xl mx-auto space-y-8">
           <motion.h2 variants={fadeInUp} className="text-4xl md:text-6xl font-semibold">Services</motion.h2>
           <motion.p variants={fadeInUp} className="text-brand-gray text-lg">
             Elevating your business through comprehensive design solutions tailored to your unique market positioning.
@@ -285,7 +291,7 @@ export default function App() {
                 key={i}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+                viewport={{ once: false, amount: 0.2 }}
                 className="p-8 rounded-3xl border border-brand-border bg-brand-dark"
               >
                 <div className="flex gap-1 mb-6 text-brand-light">
