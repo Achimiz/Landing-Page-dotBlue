@@ -83,6 +83,24 @@ export default function App() {
             <div className="absolute inset-0 bg-cyan-400 mix-blend-multiply z-10 rounded-[100px] blur-3xl opacity-80"></div>
           </div>
         </div>
+
+        {/* Shooting Stars Layer */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <div className="absolute top-1/2 left-1/2 w-[200%] h-[200%]" style={{ transform: 'translate(-50%, -50%) rotate(155deg)' }}>
+            {[...Array(20)].map((_, i) => (
+              <div 
+                key={i} 
+                className="shooting-star"
+                style={{
+                  top: `${Math.random() * 100}%`,
+                  left: `${Math.random() * 100}%`,
+                  animationDelay: `${Math.random() * 8}s`,
+                  animationDuration: `${3 + Math.random() * 4}s`
+                }}
+              />
+            ))}
+          </div>
+        </div>
         
         <motion.div 
           className="relative z-10 max-w-4xl mx-auto text-center"
@@ -339,7 +357,7 @@ export default function App() {
         </div>
       </footer>
 
-      {/* Global CSS for marquee animation */}
+      {/* Global CSS for marquee animation and shooting stars */}
       <style>{`
         @keyframes scroll {
           0% { transform: translateX(0); }
@@ -347,6 +365,52 @@ export default function App() {
         }
         .animate-scroll {
           animation: scroll 20s linear infinite;
+        }
+
+        @keyframes tail {
+          0% { width: 0; }
+          30% { width: 150px; }
+          100% { width: 0; }
+        }
+        @keyframes shooting {
+          0% { transform: translateX(0); opacity: 1; }
+          70% { opacity: 1; }
+          100% { transform: translateX(800px); opacity: 0; }
+        }
+        @keyframes shining {
+          0% { width: 0; opacity: 0; }
+          50% { width: 30px; opacity: 1; }
+          100% { width: 0; opacity: 0; }
+        }
+        .shooting-star {
+          position: absolute;
+          height: 2px;
+          background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
+          border-radius: 50px;
+          filter: drop-shadow(0 0 6px rgba(255, 255, 255, 1));
+          animation: tail 3s ease-in-out infinite, shooting 3s ease-in-out infinite;
+        }
+        .shooting-star::before {
+          content: '';
+          position: absolute;
+          top: calc(50% - 1px);
+          right: 0;
+          height: 2px;
+          background: linear-gradient(-45deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+          transform: translateX(50%) rotateZ(45deg);
+          border-radius: 100%;
+          animation: shining 3s ease-in-out infinite;
+        }
+        .shooting-star::after {
+          content: '';
+          position: absolute;
+          top: calc(50% - 1px);
+          right: 0;
+          height: 2px;
+          background: linear-gradient(-45deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+          transform: translateX(50%) rotateZ(-45deg);
+          border-radius: 100%;
+          animation: shining 3s ease-in-out infinite;
         }
       `}</style>
     </div>
