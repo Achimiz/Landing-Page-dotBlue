@@ -25,7 +25,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-brand-dark text-brand-light font-sans selection:bg-brand-gray selection:text-brand-dark">
-      
+
       {/* Navigation */}
       <nav className="fixed w-full top-0 z-50 bg-brand-dark/80 backdrop-blur-md border-b border-brand-border">
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
@@ -41,7 +41,7 @@ export default function App() {
           </div>
           <div className="hidden md:flex items-center space-x-4">
 
-            <motion.a 
+            <motion.a
               href="https://ai.psu.blue/login"
               whileHover={{ scale: 1.10 }}
               whileTap={{ scale: 0.95 }}
@@ -50,8 +50,8 @@ export default function App() {
               Give it a try!
             </motion.a>
           </div>
-          
-          <button 
+
+          <button
             className="md:hidden text-brand-light"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
@@ -65,10 +65,10 @@ export default function App() {
         {/* Background FX Setup */}
         <div className="absolute inset-0 z-0 opacity-80 mix-blend-screen pointer-events-none flex items-center justify-center">
           <div className="relative w-full h-full flex items-center justify-center">
-            <motion.img 
-              src="/images/hero_bg.png" 
-              alt="" 
-              className="w-full h-full object-cover rounded-[100px] blur-3xl relative z-0" 
+            <motion.img
+              src="/images/hero_bg.png"
+              alt=""
+              className="w-full h-full object-cover rounded-[100px] blur-3xl relative z-0"
               animate={{
                 scale: [1.2, 1.6, 1.2],
                 rotate: [0, 10, -10, 0],
@@ -88,8 +88,8 @@ export default function App() {
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           <div className="absolute top-1/2 left-1/2 w-[200%] h-[200%]" style={{ transform: 'translate(-50%, -50%) rotate(155deg)' }}>
             {[...Array(20)].map((_, i) => (
-              <div 
-                key={i} 
+              <div
+                key={i}
                 className="shooting-star"
                 style={{
                   top: `${Math.random() * 100}%`,
@@ -101,26 +101,37 @@ export default function App() {
             ))}
           </div>
         </div>
-        
-        <motion.div 
-          className="relative z-10 max-w-4xl mx-auto text-center"
+
+        <motion.div
+          className="relative z-10 w-full max-w-[1400px] px-4 mx-auto text-center"
           initial="hidden" animate="visible" variants={staggerContainer}
         >
-          <motion.div variants={fadeInUp} className="inline-flex items-center space-x-2 border border-brand-border rounded-full px-4 py-2 mb-8 bg-brand-dark/50 backdrop-blur-sm">
-            <span className="w-2 h-2 rounded-full bg-brand-light animate-pulse"></span>
-            <span className="text-sm font-medium text-brand-gray">Crafting Unique Brand Identities</span>
+          <motion.div variants={fadeInUp} className="inline-flex items-center space-x-2 border border-green-500/30 rounded-full px-4 py-2 mb-8 bg-green-500/10 backdrop-blur-sm">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+            </span>
+            <span className="text-sm font-medium text-green-200/80">Powered by Prince of Songkla University</span>
           </motion.div>
-          
+
           <motion.div variants={fadeInUp}>
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-semibold tracking-tighter leading-tight mb-8">
-              Branding that you need <span className="text-brand-gray italic font-light">Indeed</span>
+            <h1 className="text-5xl md:text-6xl lg:text-[6.5vw] xl:text-[5vw] 2xl:text-[5.5rem] font-semibold tracking-tighter leading-tight mb-8 w-full max-w-full">
+              <span className="inline-block">Elevating the organization,</span>{" "}
+              <span className="inline-block">education and research.{" "}
+                <span 
+                  className="italic font-medium text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-blue-500 text-[1.05em] ml-2 pr-[0.2em] pb-[0.1em]"
+                  style={{ filter: 'drop-shadow(0 0 15px rgba(34,211,238,0.6)) drop-shadow(0 0 30px rgba(59,130,246,0.3))' }}
+                >
+                  Security
+                </span>
+              </span>
             </h1>
           </motion.div>
-          
+
           <motion.p variants={fadeInUp} className="text-lg md:text-xl text-brand-gray mb-12 max-w-2xl mx-auto">
             Helping modern companies craft scalable aesthetics, striking visuals, and unforgettable identities.
           </motion.p>
-          
+
           <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <button className="w-full sm:w-auto px-8 py-4 bg-brand-light text-brand-dark rounded-full font-medium flex items-center justify-center gap-2 hover:bg-gray-200 transition-colors">
               Get Started Now <ArrowRight size={20} />
@@ -131,7 +142,7 @@ export default function App() {
           </motion.div>
         </motion.div>
 
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1, duration: 1 }}
@@ -153,13 +164,13 @@ export default function App() {
 
       {/* Projects Grid */}
       <section id="projects" className="py-24 px-6 md:px-12 max-w-7xl mx-auto">
-        <motion.div 
+        <motion.div
           initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={staggerContainer}
           className="grid grid-cols-1 md:grid-cols-2 gap-8"
         >
           {[1, 2, 3, 4].map((i) => (
-            <motion.div 
-              key={i} 
+            <motion.div
+              key={i}
               variants={fadeInUp}
               className="group relative rounded-3xl overflow-hidden bg-[#0F172A] aspect-[4/5] md:aspect-square flex flex-col"
             >
@@ -177,7 +188,7 @@ export default function App() {
             </motion.div>
           ))}
         </motion.div>
-        
+
         <div className="mt-16 flex flex-col items-center border-t border-brand-border pt-12">
           <a href="#" className="text-brand-gray underline underline-offset-4 hover:text-brand-light transition mb-6">All Projects</a>
           <button className="px-8 py-3 bg-brand-light text-brand-dark rounded-full font-medium hover:bg-gray-200 transition">
@@ -189,7 +200,7 @@ export default function App() {
       {/* About Me Section */}
       <section className="py-24 px-6 md:px-12 bg-[#020617]">
         <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-16 items-center">
-          <motion.div 
+          <motion.div
             initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer}
             className="flex-1 space-y-8"
           >
@@ -197,7 +208,7 @@ export default function App() {
             <motion.p variants={fadeInUp} className="text-lg text-brand-gray leading-relaxed">
               I am a multidisciplinary designer focusing on building memorable brands and functional products. With over a decade of experience, I blend aesthetics with strategy.
             </motion.p>
-            
+
             <motion.div variants={fadeInUp} className="flex flex-wrap gap-3">
               {['Product Design', 'Branding', 'Figma', 'Art Direction'].map(skill => (
                 <span key={skill} className="px-4 py-2 rounded-full bg-brand-border text-sm font-medium">#{skill}</span>
@@ -220,8 +231,8 @@ export default function App() {
               ))}
             </motion.div>
           </motion.div>
-          
-          <motion.div 
+
+          <motion.div
             initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.8 }}
             className="flex-1 relative"
           >
@@ -267,10 +278,10 @@ export default function App() {
               </div>
             </div>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {[1, 2].map((i) => (
-              <motion.div 
+              <motion.div
                 key={i}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -306,7 +317,7 @@ export default function App() {
             { q: "Do you offer development services?", a: "Yes, I collaborate with talented developers or use no-code tools like Framer and Webflow to bring designs to life." }
           ].map((faq, i) => (
             <div key={i} className="border border-brand-border rounded-2xl overflow-hidden bg-[#020617]">
-              <button 
+              <button
                 onClick={() => toggleFaq(i)}
                 className="w-full flex justify-between items-center p-6 text-left font-medium text-lg hover:bg-brand-border/30 transition"
               >
@@ -315,9 +326,9 @@ export default function App() {
               </button>
               <AnimatePresence>
                 {openFaq === i && (
-                  <motion.div 
-                    initial={{ height: 0, opacity: 0 }} 
-                    animate={{ height: "auto", opacity: 1 }} 
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
                     transition={{ duration: 0.3 }}
                   >
@@ -337,10 +348,13 @@ export default function App() {
         <h2 className="text-4xl md:text-6xl font-semibold max-w-3xl mx-auto leading-tight mb-12">
           Curious about what we can create together?
         </h2>
-        
-        <div className="inline-flex items-center space-x-2 border border-brand-border rounded-full px-5 py-2 mb-12 bg-brand-border/30">
-          <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-          <span className="text-sm font-medium">Available for Work</span>
+
+        <div className="inline-flex items-center space-x-2 border border-green-500/30 rounded-full px-5 py-2 mb-12 bg-green-500/10 backdrop-blur-sm">
+          <span className="relative flex h-2 w-2">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+          </span>
+          <span className="text-sm font-medium text-green-200/80">Available for Work</span>
         </div>
 
         <button className="px-10 py-5 bg-brand-light text-brand-dark rounded-full font-semibold text-lg hover:bg-gray-200 transition-colors mb-24">
