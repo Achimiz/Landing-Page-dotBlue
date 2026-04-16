@@ -17,6 +17,13 @@ const staggerContainer = {
   }
 };
 
+const starsData = [...Array(12)].map(() => ({
+  top: `${Math.random() * 100}%`,
+  left: `${Math.random() * 100}%`,
+  animationDelay: `${Math.random() * 8}s`,
+  animationDuration: `${3 + Math.random() * 4}s`
+}));
+
 export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [openFaq, setOpenFaq] = useState(null);
@@ -73,7 +80,7 @@ export default function App() {
             <motion.img
               src="/images/hero_bg.png"
               alt=""
-              className="w-full h-full object-cover rounded-[100px] blur-3xl relative z-0"
+              className="w-full h-full object-cover rounded-[100px] blur-3xl relative z-0 transform-gpu will-change-transform"
               animate={{
                 scale: [1.2, 1.6, 1.2],
                 rotate: [0, 10, -10, 0],
@@ -90,18 +97,13 @@ export default function App() {
         </div>
 
         {/* Shooting Stars Layer */}
-        <motion.div className="absolute inset-0 pointer-events-none overflow-hidden" style={{ opacity: bgOpacity }}>
+        <motion.div className="absolute inset-0 pointer-events-none overflow-hidden hidden md:block" style={{ opacity: bgOpacity }}>
           <div className="absolute top-1/2 left-1/2 w-[200%] h-[200%]" style={{ transform: 'translate(-50%, -50%) rotate(155deg)' }}>
-            {[...Array(20)].map((_, i) => (
+            {starsData.map((star, i) => (
               <div
                 key={i}
                 className="shooting-star"
-                style={{
-                  top: `${Math.random() * 100}%`,
-                  left: `${Math.random() * 100}%`,
-                  animationDelay: `${Math.random() * 8}s`,
-                  animationDuration: `${3 + Math.random() * 4}s`
-                }}
+                style={star}
               />
             ))}
           </div>
@@ -124,7 +126,7 @@ export default function App() {
             <h1 className="text-5xl md:text-6xl lg:text-[6.5vw] xl:text-[5vw] 2xl:text-[5.5rem] font-semibold tracking-tighter leading-tight mb-8 w-full max-w-full">
               <span className="inline-block">Elevating the organization,</span>{" "}
               <span className="inline-block">education and research.{" "}
-                <span 
+                <span
                   className="italic font-medium text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-blue-500 text-[1.05em] ml-2 pr-[0.2em] pb-[0.1em]"
                   style={{ filter: 'drop-shadow(0 0 15px rgba(34,211,238,0.6)) drop-shadow(0 0 30px rgba(59,130,246,0.3))' }}
                 >
@@ -134,29 +136,37 @@ export default function App() {
             </h1>
           </motion.div>
 
-          <motion.p variants={fadeInUp} className="text-lg md:text-xl text-brand-gray mb-12 max-w-2xl mx-auto">
-            Helping modern companies craft scalable aesthetics, striking visuals, and unforgettable identities.
+          <motion.p variants={fadeInUp} className="text-lg md:text-xl text-brand-gray mb-12 max-w-4xl mx-auto leading-relaxed">
+            "Specializing in digital transformation and secure systems to empower institutions,<br className="hidden md:block" /> researchers, and modern workspaces toward global standards."
           </motion.p>
 
           <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <button className="w-full sm:w-auto px-8 py-4 bg-brand-light text-brand-dark rounded-full font-medium flex items-center justify-center gap-2 hover:bg-gray-200 transition-colors">
+            <motion.button 
+              whileHover={{ scale: 1.10 }}
+              whileTap={{ scale: 0.95 }}
+              className="w-full sm:w-auto px-8 py-4 bg-brand-light text-brand-dark rounded-full font-medium flex items-center justify-center gap-2 hover:!bg-blue-400 hover:!text-white transition-colors cursor-pointer"
+            >
               Get Started Now <ArrowRight size={20} />
-            </button>
-            <button className="w-full sm:w-auto px-8 py-4 bg-transparent border border-brand-border text-brand-light rounded-full font-medium hover:bg-brand-border transition-colors">
-              See Projects
-            </button>
+            </motion.button>
+
           </motion.div>
         </motion.div>
 
-        <motion.div
+        <motion.button
+          onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1, duration: 1 }}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center text-brand-gray text-sm"
+          className="mt-16 md:mt-20 flex flex-col items-center text-brand-gray text-sm relative z-10 hover:text-brand-light transition-colors cursor-pointer"
         >
           <span className="mb-2">Scroll down to see projects</span>
-          <ArrowDown size={20} className="animate-bounce" />
-        </motion.div>
+          <motion.div
+            animate={{ y: [0, 10, 0] }}
+            transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+          >
+            <ArrowDown size={20} />
+          </motion.div>
+        </motion.button>
       </section>
 
       {/* Brands Row */}
